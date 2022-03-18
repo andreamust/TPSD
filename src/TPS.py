@@ -24,7 +24,7 @@ class TPS:
         ('B', 'A##', 'Cb')
     ]
 
-    def __init__(self, key: str, chord: list, scale_grades: list = None, show: bool = None):
+    def __init__(self, key: str, chord: list[str], scale_grades: list[str] = None, show: bool = None):
         if scale_grades is None:
             self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
         self.key = key.upper()
@@ -105,6 +105,5 @@ class TPS:
         else:
             pass
 
-
-chord = TPS(key='C', chord=['C', 'E', 'G'], show=True)
-chord.show_table()
+# chord = TPS(key='C', chord=['C', 'E', 'G'], show=True)
+# chord.show_table()
