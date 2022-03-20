@@ -5,6 +5,7 @@ De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similar
 """
 import TPS
 from tabulate import tabulate
+from termcolor import colored, cprint
 
 
 class TPSD:
@@ -45,6 +46,6 @@ class TPSD:
         final_plot = []
         for i, level in enumerate(plot_level_a):
             y = plot_level_b[i]
-            final_plot.append([x if x == y[idx] else ((str(y[idx])) if x == '_' else (str(x))) for idx, x in enumerate(level)])
+            final_plot.append([x if x == y[idx] else (colored(str(y[idx]), 'red', attrs=['bold'])) if x == '_' else (colored(str(x), 'red', attrs=['bold'])) for idx, x in enumerate(level)])
 
         print('TPSD plot\n', tabulate(final_plot))

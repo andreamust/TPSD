@@ -1,1 +1,2 @@
 tabulate~=0.8.9
+termcolor~=1.1.0
