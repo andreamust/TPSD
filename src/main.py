@@ -13,3 +13,4 @@ def parse_song():
 if __name__ == '__main__':
     tpsd = TPSD.TPSD(chord_a=['C', 'E', 'G'], key_a='C', chord_b=['C#', 'F', 'G#'], key_b='C#', show=True)
     print(tpsd.get_distance())
+    tpsd.plot()

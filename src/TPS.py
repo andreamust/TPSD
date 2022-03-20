@@ -87,18 +87,17 @@ class TPS:
         fifth_grades = [self.note_index(self.chord[0]), fifth]
         return fifth_grades
 
+    def prepare_show(self):
+        show_levels = [self.chromatic_level, ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']]
+        for level in [self.root_level(), self.fifth_level(), self.triadic_level(), self.diatonic_level()][::-1]:
+            show_levels.insert(0, [grade if grade in level else '_' for grade in self.chromatic_level])
+        return show_levels
+
     def show_table(self):
         """
         Prints a table of the TPS if the show parameter is set to True when initialising the class.
         """
-        if self.show:
-            show_levels = [self.chromatic_level, ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']]
-            for level in [self.root_level(), self.fifth_level(), self.triadic_level(), self.diatonic_level()][::-1]:
-                show_levels.insert(0, [grade if grade in level else '_' for grade in self.chromatic_level])
-
-            print(tabulate(show_levels))
-        else:
-            pass
+        print(tabulate(self.prepare_show()))
 
 # chord = TPS(key='C', chord=['C', 'E', 'G'], show=True)
 # chord.show_table()
