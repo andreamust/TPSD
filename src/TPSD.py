@@ -1,15 +1,17 @@
 """
 This script contains a Python 3 re-implementation of the Tonal Pith Space Distance (TPSD) algorithm as presented in:
 
-De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions. In: ISMIR. pp. 51–56 (2008)
+De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
+In: ISMIR. pp. 51–56 (2008)
 """
-import TPS
 from tabulate import tabulate
-from termcolor import colored, cprint
+from termcolor import colored
+
+from TPS import TPS
 
 
 class TPSD:
-    def __init__(self, chord_a: list[str], key_a: str, chord_b: list[str], key_b: str, show: bool = False):
+    def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str], show: bool = False):
         """
         Computes argument from TPS and organises them in a coherent manner
         :param chord_a: first chord to compare
@@ -17,8 +19,8 @@ class TPSD:
         :param chord_b: second chord to compare
         :param key_b: key of the second chord
         """
-        self.chord_a = TPS.TPS(key=key_a, chord=chord_a, show=show)
-        self.chord_b = TPS.TPS(key=key_b, chord=chord_b, show=show)
+        self.chord_a = TPS(key=key_a, chord=chord_a, show=show)
+        self.chord_b = TPS(key=key_b, chord=chord_b, show=show)
 
         self.tps_a = [self.chord_a.root_level(), self.chord_a.fifth_level(), self.chord_a.triadic_level(),
                       self.chord_a.diatonic_level()]
@@ -46,6 +48,7 @@ class TPSD:
         final_plot = []
         for i, level in enumerate(plot_level_a):
             y = plot_level_b[i]
-            final_plot.append([x if x == y[idx] else (colored(str(y[idx]), 'red', attrs=['bold'])) if x == '_' else ((str(x))) for idx, x in enumerate(level)])
+            final_plot.append([x if x == y[idx] else (colored(str(y[idx]), 'red', attrs=['bold'])) if x == '_' else (
+                str(x)) for idx, x in enumerate(level)])
 
         print('TPSD plot\n', tabulate(final_plot))

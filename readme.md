@@ -1,12 +1,11 @@
-# Re-implementation of TPSD
+# Tonal Pitch Step Distance (TPSD)
 
-This repository contains a Python 3 re-implementation of the Tonal Pitch Space Distance as described in:
+In this repository, we propose a Python3 implementation of the Tonal Pitch Space Distance as described
+in ([De Haas et al., 2008](https://ismir2008.ismir.net/papers/ISMIR2008_252.pdf))
+and ([De Haas et al., 2013](https://link.springer.com/article/10.1007/s13735-013-0036-6))
 
----
-De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions. In: ISMIR. pp. 51–56 (2008)
----
+The content of this repository is in no way attributable to the authors of the above-mentioned papers.
 
-The implementation contained in this repository has nothing to do with the authors of the above-mentioned paper and has
-to be intended an interpretation of their work.
+## Usage
 
-
+TBD

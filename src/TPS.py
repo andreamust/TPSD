@@ -1,19 +1,26 @@
 """
 This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS) algorithm as presented in:
 
-De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions. In: ISMIR. pp. 51–56 (2008)
+De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
+In: ISMIR. pp. 51–56 (2008)
 """
+from chord_labels import parse_chord
 from tabulate import tabulate
 
 
 class TPS:
     chromatic_level = list(range(0, 12))
 
-    def __init__(self, key: str, chord: list[str], scale_grades: list[str] = None, show: bool = None):
-        if scale_grades is None:
+    def __init__(self, key: list[str], chord: str, show: bool = None):
+        if key[1] == 'maj':
             self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
-        self.key = key.upper()
-        self.chord = chord
+        elif key[1] == 'min':
+            self.scale_grades = [2, 1, 2, 2, 1, 2, 2]
+        else:
+            raise NameError('The only two scale grades accepted are "min" and "maj".')
+
+        self.key = key[0].upper()
+        self.chord = parse_chord(chord)
         self.show = show
 
     @staticmethod
@@ -62,29 +69,23 @@ class TPS:
         grades of all notes in the chord.
         :return: a list of the grades belonging to the triadic level of the TPS.
         """
-        triadic_grades = []
 
-        for note in self.chord:
-            chord_note_index = self.note_index(note)
-            triadic_grades.append(chord_note_index)
-        return triadic_grades
+        return self.chord.tones
 
     def root_level(self):
         """
         Computes the root level of the TPS.
         :return: a list of the grades belonging to the root level of the TPS.
         """
-        root = self.note_index(self.chord[0])
-        return [root]
+        return [self.chord.root]
 
     def fifth_level(self):
         """
         Computes the fifth level of the TPS.
         :return: a list of the grades belonging to the fifth level of the TPS.
         """
-        fifth = self.note_index(self.chord[0]) + 7 if self.note_index(self.chord[0]) + 7 < 12 else self.note_index(
-            self.chord[0]) + 7 - 12
-        fifth_grades = [self.note_index(self.chord[0]), fifth]
+        fifth = self.chord.root + 7 if self.chord.root + 7 < 12 else self.chord.root + 7 - 12
+        fifth_grades = [self.chord.root, fifth]
         return fifth_grades
 
     def prepare_show(self):
@@ -99,5 +100,5 @@ class TPS:
         """
         print(tabulate(self.prepare_show()))
 
-# chord = TPS(key='C', chord=['C', 'E', 'G'], show=True)
+# chord = TPS(key='C', chord='C', show=True)
 # chord.show_table()
