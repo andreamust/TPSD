@@ -8,10 +8,13 @@ from chord_labels import parse_chord
 from tabulate import tabulate
 
 
-class TPS:
+class Tps:
+    """
+    Implements the preliminary methods of the TPS approach proposed by Lehrdal.
+    """
     chromatic_level = list(range(0, 12))
 
-    def __init__(self, key: list[str], chord: str, show: bool = None):
+    def __init__(self, key: list[str], chord: str):
         if key[1] == 'maj':
             self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
         elif key[1] == 'min':
@@ -21,7 +24,6 @@ class TPS:
 
         self.key = key[0].upper()
         self.chord = parse_chord(chord)
-        self.show = show
 
     @staticmethod
     def note_index(note) -> int:
@@ -88,9 +90,17 @@ class TPS:
         return fifth_grades
 
     def get_levels(self):
+        """
+        Merges all levels of TPS.
+        :return: a list of all levels of the TPS.
+        """
         return [self.diatonic_level(), self.triadic_level(), self.fifth_level(), self.root_level()]
 
     def prepare_show(self) -> list:
+        """
+        Prepares the data to be plotted.
+        :return: A list of lists containing the missing grades, replaced with the placeholder "_".
+        """
         show_levels = [self.chromatic_level, ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']]
         for level in self.get_levels():
             show_levels.insert(0, [grade if grade in level else '_' for grade in self.chromatic_level])

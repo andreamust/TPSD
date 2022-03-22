@@ -7,10 +7,14 @@ In: ISMIR. pp. 51–56 (2008)
 from tabulate import tabulate
 from termcolor import colored
 
-from TPS import TPS
+from TPS import Tps
 
 
-class TPSD:
+class Tpsd:
+    """
+    Implements the TPSD as described in De Haas et al.
+    """
+
     def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str], show: bool = False):
         """
         Computes argument from TPS and organises them in a coherent manner
@@ -19,8 +23,8 @@ class TPSD:
         :param chord_b: second chord to compare
         :param key_b: key of the second chord
         """
-        self.chord_a = TPS(key=key_a, chord=chord_a, show=show)
-        self.chord_b = TPS(key=key_b, chord=chord_b, show=show)
+        self.chord_a = Tps(key=key_a, chord=chord_a)
+        self.chord_b = Tps(key=key_b, chord=chord_b)
 
         self.tps_a = self.chord_a.get_levels()
         self.tps_b = self.chord_b.get_levels()
@@ -36,11 +40,15 @@ class TPSD:
         :return: the distance value that results from the comparison of the two chords.
         """
         distance = 0
-        for i in range(len(self.tps_a)):
+        for i, el in enumerate(self.tps_a):
             distance += len(list(set(self.tps_a[i]) - set(self.tps_b[i])))
         return distance
 
     def circle_fifth_rule(self) -> int:
+        """
+        Implements the circle of fifth rule (Lehrdal et al.).
+        :return: the resulting value of the circle of fifths rule (int from 1 to 3).
+        """
         diatonic_fifths_ascending = [0, 7, 2, 9]
         diatonic_fifths_descending = [5, 11, 4]
 
@@ -62,10 +70,18 @@ class TPSD:
             tps_distance += len(set(self.tps_a[i]).symmetric_difference(set(self.tps_b[i])))
         return tps_distance
 
-    def distance(self):
+    def distance(self) -> float:
+        """
+        Computes the total TPSD distance taking into account the Circle of Fifth rule and the Chord Distance Rule.
+        :return: a floating number which is the final value of the TPS between two chords.
+        """
         return (self.chord_distance_rule() / 2) + self.circle_fifth_rule()
 
-    def plot(self):
+    def plot(self) -> None:
+        """
+        Plots the TPSD distance ina graphical way.
+        :return : None
+        """
         plot_level_a = self.chord_a.prepare_show()
         plot_level_b = self.chord_b.prepare_show()
         final_plot = []

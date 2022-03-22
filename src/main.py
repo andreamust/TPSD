@@ -4,15 +4,19 @@ This script contains a Python 3 re-implementation of the Tonal Pith Space Distan
 De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
 In: ISMIR. pp. 51–56 (2008)
 """
-from TPSD import TPSD
+from TPSD import Tpsd
 
 
-def parse_song():
+def parse_sequence():
+    """
+    Parses a chord sequence and returns the overall TPSD value.
+    :return:
+    """
     pass
 
 
 if __name__ == '__main__':
-    tpsd = TPSD(chord_a='C', key_a=['C', 'maj'], chord_b='C', key_b=['C', 'maj'],
+    tpsd = Tpsd(chord_a='C', key_a=['C', 'maj'], chord_b='C', key_b=['C', 'maj'],
                 show=True)
     tpsd.plot()
     print(tpsd.distance())
