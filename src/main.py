@@ -12,8 +12,8 @@ def parse_song():
 
 
 if __name__ == '__main__':
-    tpsd = TPSD(chord_a='C', key_a=['C', 'maj'], chord_b='E', key_b=['E', 'maj'],
+    tpsd = TPSD(chord_a='C', key_a=['C', 'maj'], chord_b='C', key_b=['C', 'maj'],
                 show=True)
     tpsd.plot()
-    print(tpsd.chord_distance_rule())
+    print(tpsd.distance())
     print(f'fifthsRule: {tpsd.circle_fifth_rule()}\nchordDistanceRule: {tpsd.chord_distance_rule()}')

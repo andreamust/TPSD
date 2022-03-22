@@ -41,11 +41,11 @@ class TPSD:
         return distance
 
     def circle_fifth_rule(self) -> int:
-        diatonic_fifths_ascending = [7, 2, 9]
+        diatonic_fifths_ascending = [0, 7, 2, 9]
         diatonic_fifths_descending = [5, 11, 4]
 
         if self.chord_b.root_level()[0] in diatonic_fifths_ascending:
-            return diatonic_fifths_ascending.index(self.chord_b.root_level()[0]) + 1
+            return diatonic_fifths_ascending.index(self.chord_b.root_level()[0])
         elif self.chord_b.root_level()[0] in diatonic_fifths_descending:
             return diatonic_fifths_descending.index(self.chord_b.root_level()[0]) + 1
         return 3
@@ -63,7 +63,7 @@ class TPSD:
         return tps_distance
 
     def distance(self):
-        return self.chord_distance_rule() / 2 + self.circle_fifth_rule()
+        return (self.chord_distance_rule() / 2) + self.circle_fifth_rule()
 
     def plot(self):
         plot_level_a = self.chord_a.prepare_show()
