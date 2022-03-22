@@ -49,7 +49,7 @@ class TPS:
         except IndexError:
             raise NameError('The note is not indexed, try with enharmonics.')
 
-    def diatonic_level(self):
+    def diatonic_level(self) -> list[int]:
         """
         Computes the diatonic level of the TPS.
         :return: a list of the grades belonging to the diatonic level of the TPS.
@@ -63,23 +63,22 @@ class TPS:
             diatonic_grades.append(note_index)
         return diatonic_grades
 
-    def triadic_level(self):
+    def triadic_level(self) -> list[int]:
         """
         Computes the triadic level of the TPS. Contrary to what the name might suggest, the method calculates the
         grades of all notes in the chord.
         :return: a list of the grades belonging to the triadic level of the TPS.
         """
-
         return self.chord.tones
 
-    def root_level(self):
+    def root_level(self) -> list[int]:
         """
         Computes the root level of the TPS.
         :return: a list of the grades belonging to the root level of the TPS.
         """
         return [self.chord.root]
 
-    def fifth_level(self):
+    def fifth_level(self) -> list[int]:
         """
         Computes the fifth level of the TPS.
         :return: a list of the grades belonging to the fifth level of the TPS.
@@ -88,13 +87,16 @@ class TPS:
         fifth_grades = [self.chord.root, fifth]
         return fifth_grades
 
-    def prepare_show(self):
+    def get_levels(self):
+        return [self.diatonic_level(), self.triadic_level(), self.fifth_level(), self.root_level()]
+
+    def prepare_show(self) -> list:
         show_levels = [self.chromatic_level, ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']]
-        for level in [self.root_level(), self.fifth_level(), self.triadic_level(), self.diatonic_level()][::-1]:
+        for level in self.get_levels():
             show_levels.insert(0, [grade if grade in level else '_' for grade in self.chromatic_level])
         return show_levels
 
-    def show_table(self):
+    def show_table(self) -> None:
         """
         Prints a table of the TPS if the show parameter is set to True when initialising the class.
         """
