@@ -60,7 +60,10 @@ class TPSD:
         tps_distance = 0
         for i in range(len(self.tps_a)):
             tps_distance += len(set(self.tps_a[i]).symmetric_difference(set(self.tps_b[i])))
-        return tps_distance / 2 + self.circle_fifth_rule()
+        return tps_distance
+
+    def distance(self):
+        return self.chord_distance_rule() / 2 + self.circle_fifth_rule()
 
     def plot(self):
         plot_level_a = self.chord_a.prepare_show()
