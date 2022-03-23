@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 """
 This script contains a Python 3 re-implementation of the Tonal Pith Space Distance (TPSD) algorithm as presented in:
 
