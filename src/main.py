@@ -16,6 +16,7 @@ def parse_sequence():
 
 
 if __name__ == '__main__':
+    # pylint: disable=line-too-long
     tpsd = Tpsd(chord_a='C', key_a=['C', 'maj'], chord_b='C', key_b=['C', 'maj'])
     tpsd.plot()
     print(tpsd.distance())

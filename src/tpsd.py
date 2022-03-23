@@ -15,6 +15,7 @@ class Tpsd:
     Implements the TPSD as described in De Haas et al.
     """
 
+    # pylint: disable=line-too-long
     def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str]):
         """
         Computes argument from TPS and organises them in a coherent manner

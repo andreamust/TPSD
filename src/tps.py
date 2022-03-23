@@ -12,6 +12,7 @@ class Tps:
     """
     Implements the preliminary methods of the TPS approach proposed by Lehrdal.
     """
+    # pylint: disable=line-too-long
     chromatic_level = list(range(0, 12))
 
     def __init__(self, key: list[str], chord: str):
