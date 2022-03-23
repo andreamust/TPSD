@@ -1,3 +1,6 @@
+"""
+Test for TPS.
+"""
 import unittest
 
 from src.tps import Tps

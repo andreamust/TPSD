@@ -54,10 +54,9 @@ class Tpsd:
 
         if self.chord_b.root_level()[0] in diatonic_fifths_ascending:
             return diatonic_fifths_ascending.index(self.chord_b.root_level()[0])
-        elif self.chord_b.root_level()[0] in diatonic_fifths_descending:
+        if self.chord_b.root_level()[0] in diatonic_fifths_descending:
             return diatonic_fifths_descending.index(self.chord_b.root_level()[0]) + 1
-        else:
-            return 3
+        return 3
 
     def chord_distance_rule(self) -> float:
         """

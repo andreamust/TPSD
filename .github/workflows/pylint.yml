@@ -17,10 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pylint
-          pip install tabulate
-          pip install termcolor
-          pip install chord_labels
+          pip install -r requirements.txt ; pylint 2*
       - name: Analysing the code with pylint
         run: |
           pylint $(git ls-files '*.py')
