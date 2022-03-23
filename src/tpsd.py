@@ -15,7 +15,7 @@ class Tpsd:
     Implements the TPSD as described in De Haas et al.
     """
 
-    def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str], show: bool = False):
+    def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str]):
         """
         Computes argument from TPS and organises them in a coherent manner
         :param chord_a: first chord to compare
@@ -28,11 +28,6 @@ class Tpsd:
 
         self.tps_a = self.chord_a.get_levels()
         self.tps_b = self.chord_b.get_levels()
-        if show:
-            print('Plot of the first chord')
-            self.chord_a.show_table()
-            print('Plot of the second chord')
-            self.chord_b.show_table()
 
     def get_tpsd_distance(self) -> int:
         """
@@ -40,7 +35,7 @@ class Tpsd:
         :return: the distance value that results from the comparison of the two chords.
         """
         distance = 0
-        for i, tps_level in enumerate(self.tps_a):
+        for i in range(len(self.tps_a)):
             distance += len(list(set(self.tps_a[i]) - set(self.tps_b[i])))
         return distance
 
@@ -66,7 +61,7 @@ class Tpsd:
         """
 
         tps_distance = 0
-        for i, level in enumerate(self.tps_a):
+        for i in range(len(self.tps_a)):
             tps_distance += len(set(self.tps_a[i]).symmetric_difference(set(self.tps_b[i])))
         return tps_distance
 
@@ -82,6 +77,11 @@ class Tpsd:
         Plots the TPSD distance in a graphical way.
         :return : None
         """
+        print('Plot of the first chord')
+        self.chord_a.show_table()
+        print('Plot of the second chord')
+        self.chord_b.show_table()
+
         plot_level_a = self.chord_a.prepare_show()
         plot_level_b = self.chord_b.prepare_show()
         final_plot = []
