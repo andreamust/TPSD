@@ -4,7 +4,7 @@ This script contains a Python 3 re-implementation of the Tonal Pith Space Distan
 De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
 In: ISMIR. pp. 51–56 (2008)
 """
-from tpsd import Tpsd
+from src.tpsd import Tpsd
 
 
 def parse_sequence():

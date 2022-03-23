@@ -7,7 +7,7 @@ In: ISMIR. pp. 51–56 (2008)
 from tabulate import tabulate
 from termcolor import colored
 
-from tps import Tps
+from src.tps import Tps
 
 
 class Tpsd:
@@ -79,7 +79,7 @@ class Tpsd:
 
     def plot(self) -> None:
         """
-        Plots the TPSD distance ina graphical way.
+        Plots the TPSD distance in a graphical way.
         :return : None
         """
         plot_level_a = self.chord_a.prepare_show()
