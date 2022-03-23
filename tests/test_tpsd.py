@@ -1,6 +1,6 @@
 import unittest
 
-from src.TPSD import Tpsd
+from src.tpsd import Tpsd
 
 
 class TestTPSD(unittest.TestCase):

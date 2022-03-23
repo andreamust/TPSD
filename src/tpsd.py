@@ -7,7 +7,7 @@ In: ISMIR. pp. 51–56 (2008)
 from tabulate import tabulate
 from termcolor import colored
 
-from TPS import Tps
+from tps import Tps
 
 
 class Tpsd:
@@ -40,7 +40,7 @@ class Tpsd:
         :return: the distance value that results from the comparison of the two chords.
         """
         distance = 0
-        for i, el in enumerate(self.tps_a):
+        for i, tps_level in enumerate(self.tps_a):
             distance += len(list(set(self.tps_a[i]) - set(self.tps_b[i])))
         return distance
 
@@ -56,7 +56,8 @@ class Tpsd:
             return diatonic_fifths_ascending.index(self.chord_b.root_level()[0])
         elif self.chord_b.root_level()[0] in diatonic_fifths_descending:
             return diatonic_fifths_descending.index(self.chord_b.root_level()[0]) + 1
-        return 3
+        else:
+            return 3
 
     def chord_distance_rule(self) -> float:
         """
@@ -66,7 +67,7 @@ class Tpsd:
         """
 
         tps_distance = 0
-        for i in range(len(self.tps_a)):
+        for i, level in enumerate(self.tps_a):
             tps_distance += len(set(self.tps_a[i]).symmetric_difference(set(self.tps_b[i])))
         return tps_distance
 
@@ -86,8 +87,9 @@ class Tpsd:
         plot_level_b = self.chord_b.prepare_show()
         final_plot = []
         for i, level in enumerate(plot_level_a):
-            y = plot_level_b[i]
-            final_plot.append([x if x == y[idx] else (colored(str(y[idx]), 'red', attrs=['bold'])) if x == '_' else (
-                colored(str(x), 'red', attrs=['bold'])) for idx, x in enumerate(level)])
+            plot_b = plot_level_b[i]
+            final_plot.append(
+                [x if x == plot_b[idx] else (colored(str(plot_b[idx]), 'red', attrs=['bold'])) if x == '_' else (
+                    colored(str(x), 'red', attrs=['bold'])) for idx, x in enumerate(level)])
 
         print('TPSD plot\n', tabulate(final_plot))

@@ -1,6 +1,6 @@
 import unittest
 
-from src.TPS import Tps
+from src.tps import Tps
 
 
 class TestTps(unittest.TestCase):
