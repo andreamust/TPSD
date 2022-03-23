@@ -17,6 +17,7 @@ class Tpsd:
     """
 
     # pylint: disable=line-too-long
+    # pylint: disable=consider-using-enumerate
     def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str]):
         """
         Computes argument from TPS and organises them in a coherent manner

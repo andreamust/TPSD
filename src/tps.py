@@ -51,7 +51,7 @@ class Tps:
         try:
             return [i for i, n in enumerate(note_map) if note in n][0]
         except IndexError:
-            raise NameError('The note is not indexed, try with enharmonics.')
+            raise NameError('The note is not indexed, try with enharmonics.')  # pylint: disable=raise-missing-from
 
     def diatonic_level(self) -> list[int]:
         """
