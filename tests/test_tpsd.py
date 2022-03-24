@@ -11,6 +11,8 @@ class TestTpsd(unittest.TestCase):
     Tests the Tpsd class and some of its methods.
     """
 
+    # pylint: disable=line-too-long
+
     def test_distance(self):
         """
         Tests the distance C and G7 (C:maj key) as shown in Table 2 (De Haas et al. 2008).
