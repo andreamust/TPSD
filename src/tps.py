@@ -20,12 +20,12 @@ class Tps:
         if ':' not in key:
             key += ':maj'
         key_root, key_mode = key.split(':')
-        if key_mode == 'maj':
+        if key_mode.lower() == 'maj':
             self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
-        elif key_mode == 'min':
+        elif key_mode.lower() == 'min':
             self.scale_grades = [2, 1, 2, 2, 1, 2, 2]
         else:
-            raise NameError('The only two scale grades accepted are "min" and "maj".')
+            raise NameError('The only two modes accepted are "min" and "maj".')
 
         self.key = key_root.upper()
         self.chord = parse_chord(chord)

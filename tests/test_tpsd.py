@@ -43,6 +43,23 @@ class TestTpsd(unittest.TestCase):
         self.assertEqual(chord_4.distance(), 13.0,
                          "Distance between C and E:(b2,2,b3,b4,4,b5,5,b6,6,b7,7) in C:maj should be 13")
 
+    def test_distance_5(self):
+        """
+        Tests distance between two identical chords in the same key as shown in Table 5.a (De Haas et al. 2013).
+        """
+        chord_5 = Tpsd(chord_a='A:min', key_a='C:Maj', chord_b='A:min', key_b='C:maj')
+        self.assertEqual(chord_5.distance(), 0,
+                         "Distance between A:min and A:min in C:maj should be 0")
+
+    def test_chord_distance_rule(self):
+        """
+        Tests chord distance rule between C and C# containing all pitch classes, as shown in Table 5.b
+        (De Haas et al. 2013).
+        """
+        chord_6 = Tpsd(chord_a='C', key_a='C:maj', chord_b='C#:(b2,2,b3,b4,4,b5,5,b6,6,b7,7)', key_b='C:maj')
+        self.assertEqual(chord_6.chord_distance_rule(), 20,
+                         "Chord distance rule between C:maj and C#:(b2,2,b3,b4,4,b5,5,b6,6,b7,7) in C:maj should be 20")
+
 
 if __name__ == '__main__':
     unittest.main()

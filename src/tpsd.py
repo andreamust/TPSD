@@ -62,8 +62,8 @@ class Tpsd:
         :return: the distance value that results from the comparison of the two chords, which is the number of grades
         that do not correspond between all the TPS levels of the two chord taken into account.
         """
-
         tps_distance = 0
+
         for i in range(len(self.tps_a)):
             tps_distance += len(set(self.tps_a[i]).symmetric_difference(set(self.tps_b[i])))
         return tps_distance
