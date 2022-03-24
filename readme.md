@@ -52,7 +52,8 @@ chord.show_table()
 ```
 
 Which plots a table having this shape:
-![](../../../../var/folders/y6/881nbsns7rx5scbj8lx6ysym0000gn/T/TemporaryItems/NSIRD_screencaptureui_Jj4LDS/Screenshot 2022-03-24 at 14.35.29.png)
+<img width="328" alt="Screenshot 2022-03-24 at 14 59 01" src="https://user-images.githubusercontent.com/44606182/159932696-c7b6c078-a3e1-4b9b-928c-8ff8f3df9e9c.png">
+
 
 ### TPSD
 
@@ -77,8 +78,8 @@ tpsd.plot()
 ```
 
 Which returns a table representing the two chords stacked, where the non-overlapping tones are highlighted in red:
+<img width="336" alt="Screenshot 2022-03-24 at 14 58 42" src="https://user-images.githubusercontent.com/44606182/159932610-fd22a54a-752b-4076-b2d4-028349553ad3.png">
 
-![](../../../../var/folders/y6/881nbsns7rx5scbj8lx6ysym0000gn/T/TemporaryItems/NSIRD_screencaptureui_JxKKUO/Screenshot 2022-03-24 at 14.51.08.png)
 
 ## Testing
 
