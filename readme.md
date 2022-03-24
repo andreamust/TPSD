@@ -15,6 +15,8 @@ All chords and keys are expressed in the Harte notation (as described
 in [Harte et al., 2005](https://ismir2005.ismir.net/proceedings/1080.pdf)). For this, we reuse
 the [chord-labels library](https://github.com/bzamecnik/chord-labels).
 
+For running all the scripts Python 3.10 is required.
+
 ### TPS
 
 TPS implements the Tonal Pitch Space (TPS), as described
