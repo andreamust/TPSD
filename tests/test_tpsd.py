@@ -10,14 +10,38 @@ class TestTpsd(unittest.TestCase):
     """
     Tests the Tpsd class and some of its methods.
     """
-    chord = Tpsd(chord_a='C', key_a=['C', 'maj'], chord_b='C#', key_b=['C#', 'maj'])
 
     def test_distance(self):
         """
-        Tests the distance value given two chords.
+        Tests the distance C and G7 (C:maj key) as shown in Table 2 (De Haas et al. 2008).
         """
-        self.assertEqual(self.chord.distance(), 14,
-                         "Distance between C and C# should be 14")
+        chord = Tpsd(chord_a='C', key_a='C:maj', chord_b='G:7', key_b='C:maj')
+        self.assertEqual(chord.distance(), 5.5,
+                         "Distance between C and G:7 in C:maj should be 5.5")
+
+    def test_distance_2(self):
+        """
+        Tests distance between D and D:min (D:maj key) as shown in Table 3 (De Haas et al. 2008).
+        """
+        chord_2 = Tpsd(chord_a='D', key_a='D:maj', chord_b='D:min', key_b='D:maj')
+        self.assertEqual(chord_2.distance(), 1.5,
+                         "Distance between D and D:min in D:maj should be 1.5")
+
+    def test_distance_3(self):
+        """
+        Tests distance between two identical chords in the same key.
+        """
+        chord_3 = Tpsd(chord_a='F', key_a='G:maj', chord_b='F', key_b='G:maj')
+        self.assertEqual(chord_3.distance(), 0,
+                         "Distance between F and F in C:maj should be 0")
+
+    def test_distance_4(self):
+        """
+        Tests distance between C:maj and E containing all pitch classes as shown in Table 4 (De Haas et al. 2008).
+        """
+        chord_4 = Tpsd(chord_a='C', key_a='C:maj', chord_b='E:(b2,2,b3,b4,4,b5,5,b6,6,b7,7)', key_b='E:maj')
+        self.assertEqual(chord_4.distance(), 13.0,
+                         "Distance between C and E:(b2,2,b3,b4,4,b5,5,b6,6,b7,7) in C:maj should be 13")
 
 
 if __name__ == '__main__':

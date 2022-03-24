@@ -18,7 +18,7 @@ class Tpsd:
 
     # pylint: disable=line-too-long
     # pylint: disable=consider-using-enumerate
-    def __init__(self, chord_a: str, key_a: list[str], chord_b: str, key_b: list[str]):
+    def __init__(self, chord_a: str, key_a: str, chord_b: str, key_b: str):
         """
         Computes argument from TPS and organises them in a coherent manner
         :param chord_a: first chord to compare
@@ -50,10 +50,10 @@ class Tpsd:
         diatonic_fifths_ascending = [0, 7, 2, 9]
         diatonic_fifths_descending = [5, 11, 4]
 
-        if self.chord_b.root_level()[0] in diatonic_fifths_ascending:
-            return diatonic_fifths_ascending.index(self.chord_b.root_level()[0])
-        if self.chord_b.root_level()[0] in diatonic_fifths_descending:
-            return diatonic_fifths_descending.index(self.chord_b.root_level()[0]) + 1
+        if self.chord_b.root_level()[0] - self.chord_a.root_level()[0] in diatonic_fifths_ascending:
+            return diatonic_fifths_ascending.index(self.chord_b.root_level()[0] - self.chord_a.root_level()[0])
+        if self.chord_b.root_level()[0] - self.chord_a.root_level()[0] in diatonic_fifths_descending:
+            return diatonic_fifths_descending.index(self.chord_b.root_level()[0] - self.chord_a.root_level()[0]) + 1
         return 3
 
     def chord_distance_rule(self) -> float:

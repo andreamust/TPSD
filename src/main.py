@@ -18,7 +18,7 @@ def parse_sequence():
 
 if __name__ == '__main__':
     # pylint: disable=line-too-long
-    tpsd = Tpsd(chord_a='C', key_a=['C', 'maj'], chord_b='C', key_b=['C', 'maj'])
+    tpsd = Tpsd(chord_a='C', key_a='C:maj', chord_b='E:(b2,2,b3,b4,4,b5,5,b6,6,b7,7)', key_b='E:maj')
     tpsd.plot()
     print(tpsd.distance())
     print(f'fifthsRule: {tpsd.circle_fifth_rule()}\nchordDistanceRule: {tpsd.chord_distance_rule()}')

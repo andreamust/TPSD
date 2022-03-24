@@ -16,16 +16,20 @@ class Tps:
     # pylint: disable=line-too-long
     chromatic_level = list(range(0, 12))
 
-    def __init__(self, key: list[str], chord: str):
-        if key[1] == 'maj':
+    def __init__(self, chord: str, key: str):
+        if ':' not in key:
+            key += ':maj'
+        key_root, key_mode = key.split(':')
+        if key_mode == 'maj':
             self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
-        elif key[1] == 'min':
+        elif key_mode == 'min':
             self.scale_grades = [2, 1, 2, 2, 1, 2, 2]
         else:
             raise NameError('The only two scale grades accepted are "min" and "maj".')
 
-        self.key = key[0].upper()
+        self.key = key_root.upper()
         self.chord = parse_chord(chord)
+        self.tones = tuple(self.chord.tones)
 
     @staticmethod
     def note_index(note) -> int:
@@ -59,13 +63,13 @@ class Tps:
         :return: a list of the grades belonging to the diatonic level of the TPS.
         """
         note_index = self.note_index(self.key)
-        diatonic_grades = []
+        diatonic_grades = list(self.tones)
         for grade in self.scale_grades:
             note_index = (note_index + grade)
             if note_index >= 12:
                 note_index = note_index - 12
             diatonic_grades.append(note_index)
-        return diatonic_grades
+        return list(set(diatonic_grades))
 
     def triadic_level(self) -> list[int]:
         """
@@ -73,7 +77,7 @@ class Tps:
         grades of all notes in the chord.
         :return: a list of the grades belonging to the triadic level of the TPS.
         """
-        return self.chord.tones
+        return list(self.tones)
 
     def root_level(self) -> list[int]:
         """
