@@ -13,7 +13,7 @@ from src.tps import Tps
 
 class TpsComparison:
     """
-    Implements the TPSD as described in De Haas et al.
+    Implements the TPS as described in De Haas et al.
     """
 
     # pylint: disable=line-too-long
