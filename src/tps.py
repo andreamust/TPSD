@@ -5,6 +5,8 @@ This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS) 
 De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
 In: ISMIR. pp. 51–56 (2008)
 """
+from typing import List
+
 from chord_labels import parse_chord
 from tabulate import tabulate
 
@@ -57,7 +59,7 @@ class Tps:
         except IndexError:
             raise NameError('The note is not indexed, try with enharmonics.')  # pylint: disable=raise-missing-from
 
-    def diatonic_level(self) -> list[int]:
+    def diatonic_level(self) -> List[int]:
         """
         Computes the diatonic level of the TPS.
         :return: a list of the grades belonging to the diatonic level of the TPS.
@@ -71,7 +73,7 @@ class Tps:
             diatonic_grades.append(note_index)
         return list(set(diatonic_grades))
 
-    def triadic_level(self) -> list[int]:
+    def triadic_level(self) -> List[int]:
         """
         Computes the triadic level of the TPS. Contrary to what the name might suggest, the method calculates the
         grades of all notes in the chord.
@@ -79,14 +81,14 @@ class Tps:
         """
         return list(self.tones)
 
-    def root_level(self) -> list[int]:
+    def root_level(self) -> List[int]:
         """
         Computes the root level of the TPS.
         :return: a list of the grades belonging to the root level of the TPS.
         """
         return [self.chord.root]
 
-    def fifth_level(self) -> list[int]:
+    def fifth_level(self) -> List[int]:
         """
         Computes the fifth level of the TPS.
         :return: a list of the grades belonging to the fifth level of the TPS.
@@ -102,7 +104,7 @@ class Tps:
         """
         return [self.diatonic_level(), self.triadic_level(), self.fifth_level(), self.root_level()]
 
-    def prepare_show(self) -> list:
+    def prepare_show(self) -> List:
         """
         Prepares the data to be plotted.
         :return: A list of lists containing the missing grades, replaced with the placeholder "_".
