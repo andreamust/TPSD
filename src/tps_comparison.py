@@ -11,7 +11,7 @@ from termcolor import colored
 from src.tps import Tps
 
 
-class Tpsd:
+class TpsComparison:
     """
     Implements the TPSD as described in De Haas et al.
     """

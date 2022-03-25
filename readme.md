@@ -62,9 +62,9 @@ TPDS provides some methods for comparing different chords. It takes as input two
 different distance metrics as implemented in the original TPSD:
 
 ```python
-from src.tpsd import Tpsd
+from src.tps_comparison import TpsComparison
 
-tpsd = Tpsd(chord_a='C', key_a='C:maj', chord_b='E', key_b='E:maj')
+tpsd = TpsComparison(chord_a='C', key_a='C:maj', chord_b='E', key_b='E:maj')
 
 circle_of_fifth_rule = tpsd.circle_fifth_rule()
 chord_distance_rule = tpsd.chord_distance_rule()
