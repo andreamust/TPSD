@@ -8,7 +8,8 @@ The content of this repository is in no way attributable to the authors of the a
 
 ## Usage
 
-The implementation of the Tonal Pitch Step Distance (TPSD) has been split into two main modules that implement the *TPS*
+The implementation of the Tonal Pitch Step Distance (TPSD) has been split into three main modules that implement the *
+TPS*, the comparison between two *TPS distances*
 and the *TPSD*, respectively.
 
 All chords and keys are expressed in the Harte notation (as described
@@ -56,7 +57,7 @@ chord.show_table()
 Which plots a table having this shape:\
 <img width="328" alt="Screenshot 2022-03-24 at 14 59 01" src="https://user-images.githubusercontent.com/44606182/159932696-c7b6c078-a3e1-4b9b-928c-8ff8f3df9e9c.png">
 
-### TPSD
+### TPS Comparison
 
 TPDS provides some methods for comparing different chords. It takes as input two chords and their keys and returns
 different distance metrics as implemented in the original TPSD:
@@ -64,26 +65,30 @@ different distance metrics as implemented in the original TPSD:
 ```python
 from src.tps_comparison import TpsComparison
 
-tpsd = TpsComparison(chord_a='C', key_a='C:maj', chord_b='E', key_b='E:maj')
+tps_comparison = TpsComparison(chord_a='C', key_a='C:maj', chord_b='E', key_b='E:maj')
 
-circle_of_fifth_rule = tpsd.circle_fifth_rule()
-chord_distance_rule = tpsd.chord_distance_rule()
+circle_of_fifth_rule = tps_comparison.circle_fifth_rule()
+chord_distance_rule = tps_comparison.chord_distance_rule()
 
-tpsd_distance = tpsd.distance()
+tpsd_distance = tps_comparison.distance()
 ```
 
 Moreover, a method for visualising the TPSD distance has been implemented:
 
 ```python
-tpsd.plot()
+tps_comparison.plot()
 ```
 
 Which returns a table representing the two chords stacked, where the non-overlapping tones are highlighted in red:\
 <img width="336" alt="Screenshot 2022-03-24 at 14 58 42" src="https://user-images.githubusercontent.com/44606182/159932610-fd22a54a-752b-4076-b2d4-028349553ad3.png">
 
+## TPSD
+
+Development in progress
+
 ## Testing
 
-Two different unit tests have been implemented containing all the examples provided in the TPDS papers,
+Two different unit tests have been implemented containing all the examples provided in the TPSD papers,
 i.e. ([De Haas et al., 2008](https://ismir2008.ismir.net/papers/ISMIR2008_252.pdf))
 and ([De Haas et al., 2013](https://link.springer.com/article/10.1007/s13735-013-0036-6))
 

@@ -4,6 +4,10 @@ This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS) 
 
 De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
 In: ISMIR. pp. 51–56 (2008)
+
+Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis (King's College of London)
+Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
+License: MIT license
 """
 from typing import List
 
