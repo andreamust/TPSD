@@ -19,5 +19,15 @@ def open_harte(harte_file_path: str) -> list[str]:
     :param harte_file_path: the path where the file is stored
     :return: a list of string, where each string corresponds to a chord.
     """
-    with open(harte_file_path, 'r') as harte_file:
-        return [line.replace('\n', '').replace('hdim', 'hdim7') for line in harte_file]
+    with open(harte_file_path, 'r', encoding='utf-8') as harte_file:
+        return [
+            line.replace('\n', '').replace('hdim', 'hdim7').replace('(s5,*5)', '1').replace('*5', '1,3').replace('s9',
+                                                                                                                 '1,5,9').replace(
+                's5',
+                '1, 5')
+            for line in
+            harte_file]
+
+
+def parse_mgu() -> None:
+    return None

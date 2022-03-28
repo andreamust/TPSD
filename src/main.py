@@ -10,7 +10,8 @@ Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
 from src.tpsd import Tpsd
-from src.util import *
+from src.tps_comparison import TpsComparison
+from src.util import open_harte, parse_mgu
 
 
 def parse_sequence():
@@ -28,3 +29,7 @@ if __name__ == '__main__':
     tpsd = Tpsd(chord_sequence, 'C:maj')
     print(tpsd.sequence_area())
     tpsd.plot_area()
+    
+    tps_comparison = TpsComparison('C:maj', 'C:maj', 'D:min7', 'C:maj')
+    tps_comparison.plot()
+    print(tps_comparison.circle_fifth_rule())

@@ -39,7 +39,6 @@ class Tpsd:
         """
         tpsd = []
         for chord in self.chord_sequence:
-            print(chord)
             chord_tpsd = TpsComparison(chord_a=chord, key_a=self.key, chord_b=self.key, key_b=self.key)
             tpsd.append(chord_tpsd.distance())
 
@@ -53,14 +52,12 @@ class Tpsd:
         sequence = self.sequence_area()
         # sequence.insert(0, sequence[0])
 
-        y = sequence
-        x = range(len(sequence))
-        plt.step(x, y, 'orange')
+        plt.step(range(len(sequence)), sequence, 'orange')
         plt.yticks(np.arange(0, 13 + 1))
-        plt.xticks(np.arange(0, len(sequence)))
+        plt.xticks(np.linspace(0, len(sequence), 15, dtype=int))
         plt.ylabel('TPS score')
         plt.xlabel('Beat')
 
-        plt.fill_between(x, y, step='pre', color='orange', alpha=0.4)
+        plt.fill_between(range(len(sequence)), sequence, step='pre', color='orange', alpha=0.4)
 
         plt.show()
