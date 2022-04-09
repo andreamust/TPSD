@@ -10,6 +10,8 @@ Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis (Kin
 Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
+import biab_converter
+import os
 
 
 def open_harte(harte_file_path: str) -> list[str]:
@@ -21,13 +23,42 @@ def open_harte(harte_file_path: str) -> list[str]:
     """
     with open(harte_file_path, 'r', encoding='utf-8') as harte_file:
         return [
-            line.replace('\n', '').replace('hdim', 'hdim7').replace('(s5,*5)', '1').replace('*5', '1,3').replace('s9',
-                                                                                                                 '1,5,9').replace(
+            line.replace(
+                '\n', ''
+            ).replace(
+                'hdim', 'hdim7'
+            ).replace(
+                '(s5,*5)', '1'
+            ).replace(
+                '*5', '1,3'
+            ).replace(
+                's9', '1,5,9'
+            ).replace(
                 's5',
                 '1, 5')
             for line in
             harte_file]
 
 
-def parse_mgu() -> None:
-    return None
+def get_corresponding_biab(file_name: str, dataset_path: str) -> str:
+    # pylint: disable=line-too-long
+    """
+
+    :param file_name:
+    :param dataset_path:
+    :return:
+    """
+    biab_file_name = \
+        [file for file in os.listdir(dataset_path) if file == os.path.splitext(os.path.basename(file_name))[0]][0]
+    return f'{dataset_path}/{biab_file_name}'
+
+
+def parse_mgu(biab_path) -> dict[str, str]:
+    """
+    Auxiliary function that takes as input the path of a Band-in-a-box file and returns a dictionary having as a key
+    a chord and as a value the duration of such chord.
+    Note that this piece of code only relies on the software implemented by Andrew Choi
+    :param biab_path: tha path of the Band-in-a-box file
+    :return: ???
+    """
+    return biab_converter.biab(biab_path)
