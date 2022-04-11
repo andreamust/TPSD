@@ -17,12 +17,12 @@ from src.tps_comparison import TpsComparison
 
 class Tpsd:
     """
-    Implements the TPS as described in De Haas et al.
+    Implements the TPSD as described in De Haas et al.
     """
 
     # pylint: disable=line-too-long
     # pylint: disable=consider-using-enumerate
-    def __init__(self, chord_sequence: list[str], key: str) -> None:
+    def __init__(self, chord_sequence: list[str], key: str, timing_information: list[int]) -> None:
         """
         Initialises the parameters needed for calculating the TPSD distance
         :param chord_sequence: a list of chords expressed using the Harte notation
@@ -30,6 +30,7 @@ class Tpsd:
         """
         self.key = key
         self.chord_sequence = chord_sequence
+        self.timing_information = timing_information
 
     def sequence_area(self) -> list[float]:
         """
@@ -38,9 +39,10 @@ class Tpsd:
         of the global key.
         """
         tpsd = []
-        for chord in self.chord_sequence:
+        for idx, chord in enumerate(self.chord_sequence):
             chord_tpsd = TpsComparison(chord_a=chord, key_a=self.key, chord_b=self.key, key_b=self.key)
-            tpsd.append(chord_tpsd.distance())
+            for repetition in range(self.timing_information[idx]):
+                tpsd.append(chord_tpsd.distance())
 
         return tpsd
 
