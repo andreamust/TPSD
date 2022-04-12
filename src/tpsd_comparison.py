@@ -45,14 +45,15 @@ class TpsdComparison:
         """
         sequence_a = self.sequence_area_a
         sequence_b = self.sequence_area_b
-
-        plt.step(range(len(sequence_a)), sequence_a, 'orange')
-        plt.step(range(len(sequence_b)), sequence_b, 'red')
+        print(sequence_a)
+        print(sequence_b)
+        plt.step(range(len(sequence_a)), sequence_a, 'orange', label='sequence_1')
+        plt.step(range(len(sequence_b)), sequence_b, 'red', label='sequence_2')
         plt.yticks(np.arange(0, 13 + 1))
         plt.xticks(np.linspace(0, len(sequence_a), 15, dtype=int))
         plt.ylabel('TPS score')
         plt.xlabel('Beat')
-
+        plt.legend(loc='upper left')
         plt.fill_between(range(len(sequence_a)), sequence_a, step='pre', color='orange', alpha=0.4)
         plt.fill_between(range(len(sequence_b)), sequence_b, step='pre', color='red', alpha=0.4)
 
