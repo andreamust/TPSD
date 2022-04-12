@@ -14,9 +14,9 @@ from src.tps_comparison import TpsComparison
 from src.tpsd_comparison import TpsdComparison
 from src.util import open_harte, parse_mgu, get_corresponding_biab
 
-DATASET_PATH = '/Users/andreapoltronieri/Downloads/BiabInternetCorpus2014-06-04/allBiabData'
-TEST_FILE_A = '../test_data/All The Things You Are_id_00123_community.MGU.txt'
-TEST_FILE_B = '../test_data/All The Things You Are_id_07063_allanah.MGU.txt'
+DATASET_PATH = '../tests/dump_dataset'
+TEST_FILE_A = '../tests/test_data/All The Things You Are_id_07051_allanah.MGU.txt'
+TEST_FILE_B = '../tests/test_data/All The Things You Are_id_00123_community.MGU.txt'
 
 
 def parse_sequence():
@@ -54,7 +54,8 @@ if __name__ == '__main__':
     # TPSD CALCULATION
     ##################
     # calculates the TPSD area given a chord sequence, a key and the duration for each chord (in beats)
-    tpsd = Tpsd(chord_sequence_a, key_a, timing_info_a)
+    tpsd = Tpsd(chord_sequence_b, key_b, timing_info_b)
+    print(tpsd.sequence_area())
     # plots the TPSD area of a chord sequence
     # tpsd.plot_area()
 

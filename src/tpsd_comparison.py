@@ -1,4 +1,5 @@
 # pylint: disable=line-too-long
+# pylint: disable=too-many-arguments
 """
 This script contains a Python 3 re-implementation of the Tonal Pith Space Distance (TPSD) algorithm as presented in:
 
@@ -17,8 +18,8 @@ from src.tpsd import Tpsd
 
 class TpsdComparison:
     """
-        Implements the TPSD as described in De Haas et al.
-        """
+    Implements the TPSD as described in De Haas et al.
+    """
 
     # pylint: disable=line-too-long
     # pylint: disable=consider-using-enumerate
@@ -26,35 +27,51 @@ class TpsdComparison:
                  duration_sequence_a: list[int], duration_sequence_b: list[int]) -> None:
         """
         Implementation of the comparison between two TPSD distances
-        :param chord_sequence_a:
-        :param chord_sequence_b:
-        :param key_a:
-        :param key_b:
-        :param duration_sequence_a:
-        :param duration_sequence_b:
+        :param chord_sequence_a: the first sequence of chord to be compared
+        :param chord_sequence_b: the second sequence of chord to be compared
+        :param key_a: the key of the first sequence of chord to be compared
+        :param key_b: the key of the second sequence of chord to be compared
+        :param duration_sequence_a: the duration information of the first sequence of chord to be compared
+        :param duration_sequence_b: the duration information of the second sequence of chord to be compared
         """
         tpsd_a = Tpsd(chord_sequence_a, key_a, duration_sequence_a)
         tpsd_b = Tpsd(chord_sequence_b, key_b, duration_sequence_b)
         self.sequence_area_a = tpsd_a.sequence_area()
         self.sequence_area_b = tpsd_b.sequence_area()
 
+        self.longest_sequence = len(self.sequence_area_a) if len(self.sequence_area_a) >= len(
+            self.sequence_area_b) else len(self.sequence_area_b)
+        self.shortest_sequence = len(self.sequence_area_a) if len(self.sequence_area_a) <= len(
+            self.sequence_area_b) else len(self.sequence_area_b)
+
     def plot_area(self) -> None:
         """
-
-        :return: None
+        Plots the areas of the two sequences overlapped, showing intersections between the two areas
+        :return: None, but plots a matplotlib graph
         """
         sequence_a = self.sequence_area_a
         sequence_b = self.sequence_area_b
-        print(sequence_a)
-        print(sequence_b)
+
         plt.step(range(len(sequence_a)), sequence_a, 'orange', label='sequence_1')
         plt.step(range(len(sequence_b)), sequence_b, 'red', label='sequence_2')
-        plt.yticks(np.arange(0, 13 + 1))
-        plt.xticks(np.linspace(0, len(sequence_a), 15, dtype=int))
+        plt.yticks(np.arange(0, 14))
+        plt.xticks(np.linspace(0, self.longest_sequence, 15, dtype=int))
         plt.ylabel('TPS score')
-        plt.xlabel('Beat')
+        plt.xlabel('Beats')
         plt.legend(loc='upper left')
         plt.fill_between(range(len(sequence_a)), sequence_a, step='pre', color='orange', alpha=0.4)
         plt.fill_between(range(len(sequence_b)), sequence_b, step='pre', color='red', alpha=0.4)
 
         plt.show()
+
+    def minimum_area(self) -> int:
+        """
+        Calculates the minimum area between the step functions calculated over two chord sequences
+        :return: an integer which corresponds to the value of minimum area between the two areas
+        :return: a string ???
+        """
+
+        for beat in range(self.longest_sequence):
+            pass
+
+        return 1
