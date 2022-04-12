@@ -39,10 +39,10 @@ class TpsdComparison:
         self.sequence_area_a = tpsd_a.sequence_area()
         self.sequence_area_b = tpsd_b.sequence_area()
 
-        self.longest_sequence = len(self.sequence_area_a) if len(self.sequence_area_a) >= len(
-            self.sequence_area_b) else len(self.sequence_area_b)
-        self.shortest_sequence = len(self.sequence_area_a) if len(self.sequence_area_a) <= len(
-            self.sequence_area_b) else len(self.sequence_area_b)
+        self.longest_sequence = self.sequence_area_a if len(self.sequence_area_a) >= len(
+            self.sequence_area_b) else self.sequence_area_b
+        self.shortest_sequence = self.sequence_area_a if len(self.sequence_area_a) <= len(
+            self.sequence_area_b) else self.sequence_area_b
 
     def plot_area(self) -> None:
         """
@@ -55,7 +55,7 @@ class TpsdComparison:
         plt.step(range(len(sequence_a)), sequence_a, 'orange', label='sequence_1')
         plt.step(range(len(sequence_b)), sequence_b, 'red', label='sequence_2')
         plt.yticks(np.arange(0, 14))
-        plt.xticks(np.linspace(0, self.longest_sequence, 15, dtype=int))
+        plt.xticks(np.linspace(0, len(self.longest_sequence), 15, dtype=int))
         plt.ylabel('TPS score')
         plt.xlabel('Beats')
         plt.legend(loc='upper left')
@@ -64,14 +64,23 @@ class TpsdComparison:
 
         plt.show()
 
-    def minimum_area(self) -> int:
+    def minimum_area(self) -> float:
         """
         Calculates the minimum area between the step functions calculated over two chord sequences
-        :return: an integer which corresponds to the value of minimum area between the two areas
-        :return: a string ???
+        :return: a floating number which corresponds to the value of minimum area between the two areas
         """
+        minimum_area = 0
+        longest = self.longest_sequence[:]
+        for step in range(len(self.longest_sequence) - len(self.shortest_sequence) + 1):
+            if step != 0:
+                longest.pop(0)
+            area = 0
+            for beat in range(len(self.shortest_sequence)):
+                lower = self.shortest_sequence[beat] if self.shortest_sequence[beat] <= longest[beat] else \
+                    longest[beat]
+                area += lower
+                # print(f'beat: {beat}\nhigher: {higher}\nlower:{lower}')
+            if minimum_area > area or step == 0:
+                minimum_area = area
 
-        for beat in range(self.longest_sequence):
-            pass
-
-        return 1
+        return minimum_area

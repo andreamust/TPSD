@@ -55,7 +55,6 @@ if __name__ == '__main__':
     ##################
     # calculates the TPSD area given a chord sequence, a key and the duration for each chord (in beats)
     tpsd = Tpsd(chord_sequence_b, key_b, timing_info_b)
-    print(tpsd.sequence_area())
     # plots the TPSD area of a chord sequence
     # tpsd.plot_area()
 
@@ -64,3 +63,5 @@ if __name__ == '__main__':
     # calculates the TPSD among two chord sequences
     tpsd_comparison = TpsdComparison(chord_sequence_a, chord_sequence_b, key_a, key_b, timing_info_a, timing_info_b)
     tpsd_comparison.plot_area()
+    # compute the minimum area
+    print(tpsd_comparison.minimum_area())

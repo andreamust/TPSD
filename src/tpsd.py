@@ -41,7 +41,7 @@ class Tpsd:
         tpsd = []
         for idx, chord in enumerate(self.chord_sequence):
             chord_tpsd = TpsComparison(chord_a=chord, key_a=self.key, chord_b=self.key, key_b=self.key)
-            for repetition in range(self.timing_information[idx]):
+            for _ in range(self.timing_information[idx]):
                 tpsd.append(chord_tpsd.distance())
 
         return tpsd
