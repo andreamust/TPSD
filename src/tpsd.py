@@ -52,20 +52,23 @@ class Tpsd:
 
         return tpsd
 
-    def plot_area(self) -> None:
+    def plot_area(self, **fig_kwargs) -> None:
         """
         Plots the area calculated applying the TPS algorithm on a chord sequence
         :return: None but plots the area defined by the TPSD.
         """
         sequence = self.sequence_area()
         # sequence.insert(0, sequence[0])
+        fig, ax = plt.subplots(**fig_kwargs)
 
-        plt.step(range(len(sequence)), sequence, 'orange')
-        plt.yticks(np.arange(0, 13 + 1))
-        plt.xticks(np.linspace(0, len(sequence), 15, dtype=int))
-        plt.ylabel('TPS score')
-        plt.xlabel('Beat')
+        ax.step(range(len(sequence)), sequence, 'orange')
+        ax.set_yticks(np.arange(0, 13 + 1))
+        ax.set_xticks(np.linspace(0, len(sequence), 15, dtype=int))
+        ax.set_ylabel('TPS score')
+        ax.set_xlabel('Beat')
 
-        plt.fill_between(range(len(sequence)), sequence, step='pre', color='orange', alpha=0.4)
+        ax.fill_between(range(len(sequence)), sequence,
+                        step='pre', color='orange', alpha=0.4)
+        plt.show()  # XXX would leave out
 
-        plt.show()
+        return fig, ax
