@@ -9,6 +9,7 @@ Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis (Kin
 Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
+from typing import Union
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -22,13 +23,18 @@ class Tpsd:
 
     # pylint: disable=line-too-long
     # pylint: disable=consider-using-enumerate
-    def __init__(self, chord_sequence: list[str], key: str, timing_information: list[int]) -> None:
+    def __init__(self, chord_sequence: list[str], keys: Union[str, list[str]], timing_information: list[int]) -> None:
         """
         Initialises the parameters needed for calculating the TPSD distance
         :param chord_sequence: a list of chords expressed using the Harte notation
-        :param key: the key of the chord sequence to which calculate the sequence distance.
+        :param keys: the keys of the chord sequence to which calculate the sequence distance.
         """
-        self.key = key
+        if isinstance(keys, str):  # creating a local key vector
+            keys = [keys] * len(chord_sequence)
+        if len(chord_sequence) != len(timing_information) != len(keys):
+            raise ValueError("Size mismatch: cannot compute TSPD profile")
+
+        self.keys = keys
         self.chord_sequence = chord_sequence
         self.timing_information = timing_information
 
@@ -39,8 +45,8 @@ class Tpsd:
         of the global key.
         """
         tpsd = []
-        for idx, chord in enumerate(self.chord_sequence):
-            chord_tpsd = TpsComparison(chord_a=chord, key_a=self.key, chord_b=self.key, key_b=self.key)
+        for idx, (chord, key) in enumerate(zip(self.chord_sequence, self.keys)):
+            chord_tpsd = TpsComparison(chord_a=chord, key_a=key, chord_b=key, key_b=key)
             for _ in range(self.timing_information[idx]):
                 tpsd.append(chord_tpsd.distance())
 

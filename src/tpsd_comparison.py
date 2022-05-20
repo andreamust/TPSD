@@ -10,6 +10,8 @@ Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis (Kin
 Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
+from typing import Union
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -23,14 +25,15 @@ class TpsdComparison:
 
     # pylint: disable=line-too-long
     # pylint: disable=consider-using-enumerate
-    def __init__(self, chord_sequence_a: list[str], chord_sequence_b: list[str], key_a: str, key_b: str,
+    def __init__(self, chord_sequence_a: list[str], chord_sequence_b: list[str],
+                 key_a: Union[str, list[str]], key_b: Union[str, list[str]],
                  duration_sequence_a: list[int], duration_sequence_b: list[int]) -> None:
         """
         Implementation of the comparison between two TPSD distances
         :param chord_sequence_a: the first sequence of chord to be compared
         :param chord_sequence_b: the second sequence of chord to be compared
-        :param key_a: the key of the first sequence of chord to be compared
-        :param key_b: the key of the second sequence of chord to be compared
+        :param key_a: the key(s) of the first sequence of chord to be compared
+        :param key_b: the key(s) of the second sequence of chord to be compared
         :param duration_sequence_a: the duration information of the first sequence of chord to be compared
         :param duration_sequence_b: the duration information of the second sequence of chord to be compared
         """
