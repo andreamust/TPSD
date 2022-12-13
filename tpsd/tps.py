@@ -1,11 +1,14 @@
 # pylint: disable=line-too-long
 """
-This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS) algorithm as presented in:
+This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS)
+algorithm as presented in:
 
-De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a similarity measure for chord progressions.
+De Haas, W.B., Veltkamp, R.C., Wiering, F.: Tonal pitch step distance: a
+similarity measure for chord progressions.
 In: ISMIR. pp. 51–56 (2008)
 
-Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis (King's College of London)
+Author: Andrea Poltronieri (University of Bologna) and Jacopo de Berardinis
+(King's College of London)
 Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
@@ -61,7 +64,8 @@ class Tps:
         try:
             return [i for i, n in enumerate(note_map) if note in n][0]
         except IndexError:
-            raise NameError('The note is not indexed, try with enharmonics.')  # pylint: disable=raise-missing-from
+            raise NameError(
+                'The note is not indexed, try with enharmonics.')  # pylint: disable=raise-missing-from
 
     def diatonic_level(self) -> List[int]:
         """
@@ -79,7 +83,8 @@ class Tps:
 
     def triadic_level(self) -> List[int]:
         """
-        Computes the triadic level of the TPS. Contrary to what the name might suggest, the method calculates the
+        Computes the triadic level of the TPS. Contrary to what the name might
+        suggest, the method calculates the
         grades of all notes in the chord.
         :return: a list of the grades belonging to the triadic level of the TPS.
         """
@@ -97,7 +102,8 @@ class Tps:
         Computes the fifth level of the TPS.
         :return: a list of the grades belonging to the fifth level of the TPS.
         """
-        fifth = self.chord.root + 7 if self.chord.root + 7 < 12 else self.chord.root + 7 - 12
+        fifth = self.chord.root + 7 if self.chord.root + 7 < 12 \
+            else self.chord.root + 7 - 12
         fifth_grades = [self.chord.root, fifth]
         return fifth_grades
 
@@ -106,21 +112,29 @@ class Tps:
         Merges all levels of TPS.
         :return: a list of all levels of the TPS.
         """
-        return [self.diatonic_level(), self.triadic_level(), self.fifth_level(), self.root_level()]
+        return [self.diatonic_level(), self.triadic_level(), self.fifth_level(),
+                self.root_level()]
 
     def prepare_show(self) -> List:
         """
         Prepares the data to be plotted.
-        :return: A list of lists containing the missing grades, replaced with the placeholder "_".
+        :return: A list of lists containing the missing grades, replaced with
+        the placeholder "_".
+        :rtype: List
         """
-        show_levels = [self.chromatic_level, ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B']]
+        show_levels = [self.chromatic_level,
+                       ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'G#', 'A',
+                        'Bb', 'B']]
         for level in self.get_levels():
-            show_levels.insert(0, [grade if grade in level else '_' for grade in self.chromatic_level])
+            show_levels.insert(0, [grade if grade in level else '_' for grade in
+                                   self.chromatic_level])
         return show_levels
 
     def show_table(self) -> None:
         """
-        Prints a table of the TPS if the show parameter is set to True when initialising the class.
+        Prints a table of the TPS if the show parameter is set to True when
+        initialising the class.
+        :return: None
         """
         print(tabulate(self.prepare_show()))
 

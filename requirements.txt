@@ -1,7 +1,5 @@
 tabulate~=0.8.9
 termcolor~=1.1.0
-antlr4-python3-runtime~=4.7
-chord_labels~=0.1
 typing~=3.7.4.3
 matplotlib~=3.5.1
 numpy~=1.21.2

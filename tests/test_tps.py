@@ -3,7 +3,7 @@ Test for TPS.
 """
 import unittest
 
-from src.tps import Tps
+from tpsd.tps import Tps
 
 
 class TestTps(unittest.TestCase):
