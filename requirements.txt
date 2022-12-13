@@ -1,5 +1,5 @@
 tabulate~=0.8.9
 termcolor~=1.1.0
-typing~=3.7.4.3
 matplotlib~=3.5.1
 numpy~=1.21.2
+harte-library~=0.2.1
