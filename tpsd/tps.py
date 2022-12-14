@@ -14,7 +14,7 @@ License: MIT license
 """
 from typing import List
 
-from chord_labels import parse_chord
+from harte.harte import Harte
 from tabulate import tabulate
 
 
@@ -37,8 +37,8 @@ class Tps:
             raise NameError('The only two modes accepted are "min" and "maj".')
 
         self.key = key_root.upper()
-        self.chord = parse_chord(chord)
-        self.tones = tuple(self.chord.tones)
+        self._chord = Harte(chord)
+        self.tones = tuple(sorted(self._chord.pitchClasses))
 
     @staticmethod
     def note_index(note) -> int:
@@ -95,17 +95,16 @@ class Tps:
         Computes the root level of the TPS.
         :return: a list of the grades belonging to the root level of the TPS.
         """
-        return [self.chord.root]
+        return [self._chord.root().pitchClass]
 
     def fifth_level(self) -> List[int]:
         """
         Computes the fifth level of the TPS.
         :return: a list of the grades belonging to the fifth level of the TPS.
         """
-        fifth = self.chord.root + 7 if self.chord.root + 7 < 12 \
-            else self.chord.root + 7 - 12
-        fifth_grades = [self.chord.root, fifth]
-        return fifth_grades
+        root = self._chord.root().pitchClass
+        fifth = root + 7 if root + 7 < 12 else root + 7 - 12
+        return [root, fifth]
 
     def get_levels(self):
         """
