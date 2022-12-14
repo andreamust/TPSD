@@ -3,3 +3,4 @@ termcolor~=1.1.0
 matplotlib~=3.5.1
 numpy~=1.21.2
 harte-library~=0.2.1
+biab-library~=0.4.1
