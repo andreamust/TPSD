@@ -36,7 +36,7 @@ class Tps:
         else:
             raise NameError('The only two modes accepted are "min" and "maj".')
 
-        self.key = key_root.upper()
+        self.key = key_root
         self._chord = Harte(chord)
         self.tones = tuple(sorted(self._chord.pitchClasses))
 
@@ -65,7 +65,7 @@ class Tps:
             return [i for i, n in enumerate(note_map) if note in n][0]
         except IndexError as exc:
             raise NameError(
-                'The note is not indexed, try with enharmonics') from exc  # pylint: disable=raise-missing-from
+                'The note is not indexed, try with an enharmonic') from exc  # pylint: disable=raise-missing-from
 
     def diatonic_level(self) -> List[int]:
         """
