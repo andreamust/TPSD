@@ -1,5 +1,6 @@
 # pylint: disable=line-too-long
 # pylint: disable=import-error
+# pylint: disable=no-name-in-module
 """
 This file contains utility functions to support the implementation of the Tonal
 Pitch Step Distance (TPSD) algorithm

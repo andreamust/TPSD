@@ -69,16 +69,16 @@ class Tpsd:
         """
         sequence = self.sequence_area()
         # sequence.insert(0, sequence[0])
-        fig, ax = plt.subplots(**fig_kwargs)
+        fig, axis = plt.subplots(**fig_kwargs)
 
-        ax.step(range(len(sequence)), sequence, 'orange')
-        ax.set_yticks(np.arange(0, 13 + 1))
-        ax.set_xticks(np.linspace(0, len(sequence), 15, dtype=int))
-        ax.set_ylabel('TPS score')
-        ax.set_xlabel('Beat')
+        axis.step(range(len(sequence)), sequence, 'orange')
+        axis.set_yticks(np.arange(0, 13 + 1))
+        axis.set_xticks(np.linspace(0, len(sequence), 15, dtype=int))
+        axis.set_ylabel('TPS score')
+        axis.set_xlabel('Beat')
 
-        ax.fill_between(range(len(sequence)), sequence,
+        axis.fill_between(range(len(sequence)), sequence,
                         step='pre', color='orange', alpha=0.4)
-        plt.show()  #  XXX would leave out
+        plt.show()
 
-        return fig, ax
+        return fig, axis
