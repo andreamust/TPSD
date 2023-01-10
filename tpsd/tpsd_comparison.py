@@ -18,7 +18,7 @@ from typing import Union
 import matplotlib.pyplot as plt
 import numpy as np
 
-from tpsd.tpsd import Tpsd
+from tpsd.tpsd_core import Tpsd
 
 
 class TpsdComparison:

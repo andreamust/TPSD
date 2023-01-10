@@ -62,7 +62,7 @@ class Tpsd:
 
         return tpsd
 
-    def plot_area(self, **fig_kwargs) -> None:
+    def plot_area(self, **fig_kwargs) -> tuple[plt.Figure, plt.Axes]:
         """
         Plots the area calculated applying the TPS algorithm on a chord sequence
         :return: None but plots the area defined by the TPSD.

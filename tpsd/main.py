@@ -13,7 +13,7 @@ Copyright: 2022 Andrea Poltronieri and Jacopo de Berardinis
 License: MIT license
 """
 from tpsd.tps_comparison import TpsComparison
-from tpsd.tpsd import Tpsd
+from tpsd.tpsd_core import Tpsd
 from tpsd.tpsd_comparison import TpsdComparison
 from tpsd.util import open_harte, parse_mgu, get_corresponding_biab
 

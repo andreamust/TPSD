@@ -3,7 +3,7 @@ Test for TPSD.
 """
 import unittest
 
-from tpsd.tpsd import Tpsd
+from tpsd.tpsd_core import Tpsd
 from tpsd.util import open_harte, parse_mgu, get_corresponding_biab
 
 
