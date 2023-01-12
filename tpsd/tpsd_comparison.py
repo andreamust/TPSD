@@ -116,4 +116,3 @@ class TpsdComparison:
             if minimum_area > area or step == 0:
                 minimum_area = area
         return minimum_area / len(self.shortest_sequence)
-
