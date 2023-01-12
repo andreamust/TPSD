@@ -107,9 +107,13 @@ class TpsdComparison:
                                                             beat] <= longest[
                                                             beat] else \
                     longest[beat]
-                area += lower
-                # print(f'beat: {beat}\nhigher: {higher}\nlower:{lower}')
+                higher = self.shortest_sequence[beat] if self.shortest_sequence[
+                                                             beat] > longest[
+                                                             beat] else \
+                    longest[beat]
+
+                area += higher - lower
             if minimum_area > area or step == 0:
                 minimum_area = area
+        return minimum_area / len(self.shortest_sequence)
 
-        return minimum_area
