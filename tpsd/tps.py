@@ -17,6 +17,16 @@ from typing import List
 from harte.harte import Harte
 from tabulate import tabulate
 
+KEYS = {
+    'maj': [2, 2, 1, 2, 2, 2, 1],
+    'min': [2, 1, 2, 2, 1, 2, 2],
+    'dor': [2, 1, 2, 2, 2, 1, 2],
+    'mix': [2, 2, 1, 2, 2, 1, 2],
+    'lyd': [2, 2, 2, 1, 2, 2, 1],
+    'phr': [1, 2, 2, 2, 1, 2, 2],
+    'loc': [2, 2, 1, 2, 2, 2, 1],
+}
+
 
 class Tps:
     """
@@ -29,13 +39,8 @@ class Tps:
         if ':' not in key:
             key += ':maj'
         key_root, key_mode = key.split(':')
-        if key_mode.lower() == 'maj':
-            self.scale_grades = [2, 2, 1, 2, 2, 2, 1]
-        elif key_mode.lower() == 'min':
-            self.scale_grades = [2, 1, 2, 2, 1, 2, 2]
-        else:
-            raise NameError('The only two modes accepted are "min" and "maj".')
-
+        assert key_mode.lower() in KEYS.keys(), 'The entered key mode is not valid.'
+        self.scale_grades = KEYS[key_mode.lower()]
         self.key = key_root
         self._chord = Harte(chord)
         self.tones = tuple(sorted(self._chord.pitchClasses))
