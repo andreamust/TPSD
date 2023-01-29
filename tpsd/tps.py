@@ -39,9 +39,11 @@ class Tps:
         if ':' not in key:
             key += ':maj'
         key_root, key_mode = key.split(':')
-        assert key_mode.lower() in KEYS.keys(), 'The entered key mode is not valid.'
-        self.scale_grades = KEYS[key_mode.lower()]
-        self.key = key_root
+        key_mode = key_mode.replace('major', 'maj').replace('minor', 'min')
+        assert key_mode in KEYS.keys(), 'The entered key mode is not valid.'
+        self.scale_grades = KEYS[key_mode]
+        self.key = key_root if key_root != '' else chord.split(':')[0]
+        chord = chord.replace('major', 'maj').replace('minor', 'min').replace('bb1', 'b7')
         self._chord = Harte(chord)
         self.tones = tuple(sorted(self._chord.pitchClasses))
 
