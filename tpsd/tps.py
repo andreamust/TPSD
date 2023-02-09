@@ -1,4 +1,3 @@
-# pylint: disable=line-too-long
 """
 This script contains a Python 3 re-implementation of the Tonal Pith Space (TPS)
 algorithm as presented in:
@@ -32,18 +31,16 @@ class Tps:
     """
     Implements the preliminary methods of the TPS approach proposed by Lehrdal.
     """
-    # pylint: disable=line-too-long
     chromatic_level = list(range(0, 12))
 
     def __init__(self, chord: str, key: str):
         if ':' not in key:
             key += ':maj'
         key_root, key_mode = key.split(':')
-        key_mode = key_mode.replace('major', 'maj').replace('minor', 'min')
-        assert key_mode in KEYS.keys(), 'The entered key mode is not valid.'
+        key_mode = key_mode[:3].lower()
+        assert key_mode in KEYS, 'The entered key mode is not valid.'
         self.scale_grades = KEYS[key_mode]
         self.key = key_root if key_root != '' else chord.split(':')[0]
-        chord = chord.replace('major', 'maj').replace('minor', 'min').replace('bb1', 'b7')
         self._chord = Harte(chord)
         self.tones = tuple(sorted(self._chord.pitchClasses))
 
@@ -72,12 +69,12 @@ class Tps:
             return [i for i, n in enumerate(note_map) if note in n][0]
         except IndexError as exc:
             raise NameError(
-                'The note is not indexed, try with an enharmonic') from exc  # pylint: disable=raise-missing-from
+                'The note is not indexed, try with an enharmonic') from exc
 
     def diatonic_level(self) -> List[int]:
         """
         Computes the diatonic level of the TPS.
-        :return: a list of the grades belonging to the diatonic level of the TPS.
+        :return: a list of the grades belonging to the diatonic level of the TPS
         """
         note_index = self.note_index(self.key)
         diatonic_grades = list(self.tones)
@@ -144,5 +141,8 @@ class Tps:
         """
         print(tabulate(self.prepare_show()))
 
-# chord = TPS(key='C', chord='C', show=True)
-# chord.show_table()
+
+if __name__ == '__main__':
+    # test the class
+    chord = Tps(key='C', chord='N')
+    chord.show_table()
