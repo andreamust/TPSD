@@ -13,6 +13,7 @@ License: MIT license
 """
 from typing import List
 
+from harte.exceptions import ChordEmptyError
 from harte.harte import Harte
 from tabulate import tabulate
 
@@ -36,13 +37,22 @@ class Tps:
     def __init__(self, chord: str, key: str):
         if ':' not in key:
             key += ':maj'
+        self.tones = None
+        self.key = None
+        self._chord = None
         key_root, key_mode = key.split(':')
         key_mode = key_mode[:3].lower()
         assert key_mode in KEYS, 'The entered key mode is not valid.'
         self.scale_grades = KEYS[key_mode]
-        self.key = key_root if key_root != '' else chord.split(':')[0]
-        self._chord = Harte(chord)
-        self.tones = tuple(sorted(self._chord.pitchClasses))
+        if key_root != 'N' and key_root != '':
+            self.key = key_root
+        else:
+            raise ValueError(f'The entered key "{key}" root is not valid.')
+        try:
+            self._chord = Harte(chord)
+            self.tones = tuple(sorted(self._chord.pitchClasses))
+        except ChordEmptyError:
+            raise ValueError('The entered chord is empty.')
 
     @staticmethod
     def note_index(note) -> int:
@@ -118,7 +128,7 @@ class Tps:
         return [self.diatonic_level(), self.triadic_level(), self.fifth_level(),
                 self.root_level()]
 
-    def prepare_show(self) -> List:
+    def _prepare_show(self) -> List:
         """
         Prepares the data to be plotted.
         :return: A list of lists containing the missing grades, replaced with
@@ -139,7 +149,7 @@ class Tps:
         initialising the class.
         :return: None
         """
-        print(tabulate(self.prepare_show()))
+        print(tabulate(self._prepare_show()))
 
 
 if __name__ == '__main__':
